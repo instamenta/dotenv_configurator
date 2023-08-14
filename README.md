@@ -14,7 +14,7 @@ DotConfigurator can automatically transform your environment variables into the 
 ## Installation
 
 ```bash
-npm install @instamenta/dotenv_configurator
+npm install dotenv_configurator
 ```
 
 ## How it works? It's quite simple
@@ -52,7 +52,7 @@ the DotConfigurator class intelligently detects these variations and accurately 
 ```
 
 ```index.js
-const DotConfigurator = require('@instamenta/dotenv_configurator');
+const DotConfigurator = require('dotenv_configurator');
 
 const dot = new DotConfigurator(process.env);
 
