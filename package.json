@@ -1,7 +1,7 @@
 {
-  "name": "configurator",
+  "name": "dot_configurator",
   "version": "1.0.0",
-  "description": "takes .env files and makes them into different primitive values ",
+  "description": "takes .env files and makes them into different values ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
