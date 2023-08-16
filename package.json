@@ -1,6 +1,6 @@
 {
   "name": "dot_configurator",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "takes .env files and makes them into different values ",
   "types": "./lib/cjs/types/index.d.ts",
   "main": "./lib/cjs/index.js",

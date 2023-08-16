@@ -1,20 +1,36 @@
 /**
- * Description: Converts process.env variables to Number, Object, Array, Boolean
+ * Description: Converts process.env variables to different types.
+ * - Number,
+ * - Object,
+ * - Array,
+ * - Boolean
+ * - String
  *
- * @class Configurator
+ * @class DotConfigurator
+ *
+ * @example
+ * const dotEnv = DotConfigurator.fromProcessEnv(process.env);
+ *   &&
+ * const doeEnv = new DotConfigurator(process.env);
  */
-class Configurator {
-    public $__CACHE: Record<string, any>;
+class DotConfigurator {
 
     /**
-     * Takes the variables, loops and performs conversion to types
+     * Description: Map structure that holds every converted value from process.env.
+     *
+     * @property {Map<string, any>} $__CACHE
+     * @private
+     * @readonly
+     */
+    private readonly $__CACHE: Map<string, any> = new Map<string, any>();
+
+    /**
+     * Description: Takes the process.env, loops and performs conversion to different types.
      * @constructor
      *
      * @param {Record<string, string>} $_VARIABLES
      */
     constructor($_VARIABLES: Record<string, string>) {
-        this.$__CACHE = {};
-
         for (const $_KEY in $_VARIABLES) {
             if ($_VARIABLES.hasOwnProperty($_KEY)) {
                 let $_RES: number | string | object | Array<any> | boolean;
@@ -55,13 +71,14 @@ class Configurator {
                         }
                         break;
                 }
-                if ($_RES !== 'PARSING_ERROR') this.$__CACHE[$_KEY] = $_RES;
+                this.$__CACHE.set($_KEY, $_RES);
             }
         }
     }
 
     /**
-     * Description: Takes name of a variable and returns the value
+     * Description: use .GET method to get any variable that is present in the dotEnv
+     * (Optional) supply second parameter if you want to provide default value.
      *
      * @param {string} $_NAME
      * @param {any} $_DEFAULT
@@ -70,12 +87,33 @@ class Configurator {
      *
      * @public
      * @method
+     *
+     * @example
+     * const PORT = dotEnv.GET('PORT', 4000) // CLASS.GET($NAME, ?$DEFAULT_VALUE)
      */
-    GET($_NAME: string, $_DEFAULT?: any): any {
-        return this.$__CACHE.hasOwnProperty($_NAME) && typeof this.$__CACHE[$_NAME] !== 'undefined'
-            ? this.$__CACHE[$_NAME]
-            : $_DEFAULT;
+    public GET($_NAME: string, $_DEFAULT?: any): any {
+        return this.$__CACHE.has($_NAME) ? this.$__CACHE.get($_NAME) : $_DEFAULT;
+    }
+
+    /**
+
+     *
+     * Description: (Singleton Pattern) static method used for getting instance of the DotConfigurator.
+     *
+     * @param {Record<string, string>} processEnv
+     * @return {DotConfigurator}
+     *
+     * @public
+     * @static
+     * @method
+     *
+     * @example
+     * const dotEnv = DotConfigurator.fromProcessEnv(process.env);
+     * const PORT = dotEnv.GET('PORT', 4000) // CLASS.GET($NAME, ?$DEFAULT_VALUE)
+     */
+    public static fromProcessEnv(processEnv): DotConfigurator {
+        return new DotConfigurator(processEnv);
     }
 }
 
-export default Configurator;
+export default DotConfigurator;
