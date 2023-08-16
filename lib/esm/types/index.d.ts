@@ -61,7 +61,7 @@ declare class DotConfigurator {
      * const dotEnv = DotConfigurator.fromProcessEnv(process.env);
      * const PORT = dotEnv.GET('PORT', 4000) // CLASS.GET($NAME, ?$DEFAULT_VALUE)
      */
-    static fromProcessEnv(processEnv: any): DotConfigurator;
+    static fromProcessEnv(processEnv: Record<string, string>): DotConfigurator;
 }
 export default DotConfigurator;
 //# sourceMappingURL=index.d.ts.map
