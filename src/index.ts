@@ -111,7 +111,7 @@ class DotConfigurator {
      * const dotEnv = DotConfigurator.fromProcessEnv(process.env);
      * const PORT = dotEnv.GET('PORT', 4000) // CLASS.GET($NAME, ?$DEFAULT_VALUE)
      */
-    public static fromProcessEnv(processEnv): DotConfigurator {
+    public static fromProcessEnv(processEnv: Record<string, string>): DotConfigurator {
         return new DotConfigurator(processEnv);
     }
 }
